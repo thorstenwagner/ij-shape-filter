@@ -53,7 +53,6 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 	 * This plugin filters binary objects using shape parameters.
 	 * Needs ImageJ 1.47h 
 	 */
-	//Test!
 
 	private ImagePlus imp;
 	private ImageStack labeledImageStack;
