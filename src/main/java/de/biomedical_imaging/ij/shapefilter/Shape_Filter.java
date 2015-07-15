@@ -144,7 +144,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 	@Override
 	public int showDialog(ImagePlus imp, String command, PlugInFilterRunner pfr) {
 		BlobFilterDialog dialog = new BlobFilterDialog();
-		IJ.log("show");
+		
 		if (dialog.showDialog(pfr)==-1){ 
 			return DONE;
 		}else{
