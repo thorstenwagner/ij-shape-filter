@@ -4,6 +4,13 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
  
+	<parent>
+		<groupId>net.imagej</groupId>
+		<artifactId>pom-imagej</artifactId>
+		<version>7.0.0</version>
+		<relativePath />
+	</parent>
+	
 	<groupId>de.biomedical-imaging.ij</groupId>
 	<artifactId>ij_shape_filter</artifactId>
 	<version>1.2.1</version>
@@ -11,6 +18,8 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
  
 	<name>Shape Filter Plugin for ImageJ</name>
 	<url>https://github.com/jumpfunky/ij-shape-filter</url>
+	
+	
  	<dependencies>
 		<dependency>
    	 		<groupId>net.imagej</groupId>
@@ -33,5 +42,11 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 			</properties>
 		</developer>
 	</developers>
+	
+	<scm>
+		<url>https://github.com/thorstenwagner/ij-shape-filter</url>
+		<connection>scm:git:git://github.com/thorstenwagner/ij-shape-filter.git</connection>
+		<developerConnection>scm:git:git@github.com:thorstenwagner/ij-shape-filter.git</developerConnection>
+   </scm>
 
 </project>
