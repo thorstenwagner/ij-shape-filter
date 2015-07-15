@@ -5,7 +5,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
  
 	<groupId>de.biomedical-imaging.ij</groupId>
-	<artifactId>ij_shape_filter</artifactId>
+	<artifactId>ij_shape_filter_ndef</artifactId>
 	<version>1.2.1</version>
 	<packaging>jar</packaging>
  
