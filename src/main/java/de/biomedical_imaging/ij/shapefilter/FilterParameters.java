@@ -36,6 +36,7 @@ class FilterParameters {
 	private boolean drawLabel;
 	private boolean blackBackground;
 	private boolean showLabeledImage;
+	private boolean excludeOnEdges;
 	
 	/**
 	 * Sets the fill results table property
@@ -141,7 +142,7 @@ class FilterParameters {
 	}
 	
 	/**
-	 * @return
+	 * @return 
 	 */
 	public int isDrawLabel() {
 		if(drawLabel){
@@ -152,6 +153,14 @@ class FilterParameters {
 	
 	public void setDrawLabel(boolean drawLabel) {
 		this.drawLabel = drawLabel;
+	}
+	
+	public boolean isExcludeOnEdges(){
+		return excludeOnEdges;
+	}
+	
+	public void setExcludeOnEdges(boolean exclude){
+		this.excludeOnEdges = exclude;
 	}
 
 	public void addFilter(String featureMethod, double[] minxmax, Object... methodparams) {
