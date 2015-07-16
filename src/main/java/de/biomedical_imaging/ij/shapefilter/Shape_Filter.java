@@ -42,6 +42,7 @@ import ij.process.ImageStatistics;
 import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 import java.awt.image.ColorModel;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
 /*
@@ -329,6 +330,15 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 		while(it.hasNext()) {
 			pairs = it.next();
 			fb = fb.filterBlobs((double[])pairs.getValue(), pairs.getKey(),params.getFilterMethodParameter(pairs.getKey()));
+		}
+		if(params.isExcludeOnEdges()){
+			ArrayList<Blob> blobsOnEdges = new ArrayList<Blob>();
+			for (Blob blob : fb) {
+				if(blob.isOnEdge(currentIP)){
+					blobsOnEdges.add(blob);
+				}
+			}
+			fb.removeAll(blobsOnEdges);
 		}
 		return fb;
 		
