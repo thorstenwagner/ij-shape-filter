@@ -63,6 +63,7 @@ class BlobFilterDialog implements DialogListener {
 		gd.addStringField("Num._of_Holes", "0-Infinity");
 		gd.addStringField("Thinnes_ratio", "0-1");
 		gd.addStringField("Contour_Temperatur", "0-1");
+		gd.addStringField("Orientation", "0-180");
 		gd.addStringField("Fractal_Box_Dimension", "0-2");
 		gd.addStringField("Option->Box-Sizes:","2,3,4,6,8,12,16,32,64");
 
@@ -121,6 +122,7 @@ class BlobFilterDialog implements DialogListener {
 		params.addFilter(Blob.GETNUMBEROFHOLES , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETTHINNESRATIO , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_ONE));
 		params.addFilter(Blob.GETCONTOURTEMPERATURE , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_ONE));
+		params.addFilter(Blob.GETORIENTATIONMAJORAXIS, stringIntervalToArray(gd.getNextString(),"0-180"));
 		params.addFilter(Blob.GETFRACTALBOXDIMENSION , stringIntervalToArray(gd.getNextString(),"0-2"), s2ints(gd.getNextString()));
 
 		params.setAddToManager(gd.getNextBoolean());

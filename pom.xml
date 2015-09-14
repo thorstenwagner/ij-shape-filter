@@ -19,6 +19,26 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<name>Shape Filter Plugin for ImageJ</name>
 	<url>https://github.com/jumpfunky/ij-shape-filter</url>
 	
+	<profiles>
+	  <profile>
+		<id>doclint-java8-disable</id>
+		<activation>
+		  <jdk>[1.8,)</jdk>
+		</activation>
+
+		<build>
+		  <plugins>
+		    <plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-javadoc-plugin</artifactId>
+		      <configuration>
+		        <additionalparam>-Xdoclint:none</additionalparam>
+		      </configuration>
+		    </plugin>
+		  </plugins>
+		</build>
+	  </profile>
+	</profiles>
 	
  	<dependencies>
 		<dependency>
@@ -29,7 +49,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 		<dependency>
     		<groupId>de.biomedical-imaging.ij</groupId>
     		<artifactId>ij_blob</artifactId>
-    		<version>1.4.0</version>
+    		<version>1.4.1</version>
 		</dependency>
 	</dependencies>
 	<developers>

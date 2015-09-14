@@ -264,6 +264,8 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 				rt.addValue("Thinnes Rt.", fb.get(i).getThinnesRatio());
 				rt.addValue("Contour Temp.", fb.get(i)
 						.getContourTemperature());
+				rt.addValue("Orientation", fb.get(i)
+						.getOrientationMajorAxis());
 				rt.addValue("Fract. Dim.", fb.get(i)
 						.getFractalBoxDimension(params.getFractalBoxSizes()));
 				rt.addValue("Fract. Dim. Goodness", fb.get(i)
