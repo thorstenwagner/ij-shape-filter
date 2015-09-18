@@ -43,8 +43,11 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
-/*
- * Autor: Thorsten Wagner, wagner@biomedical-imaging.de
+
+/**
+ * 
+ * @author Thorsten Wagner, wagner@biomedical-imaging.de
+ *
  */
 public class Shape_Filter implements ExtendedPlugInFilter {
 	/*
