@@ -35,13 +35,11 @@ import ij.plugin.filter.Analyzer;
 import ij.plugin.filter.ExtendedPlugInFilter;
 import ij.plugin.filter.PlugInFilterRunner;
 import ij.plugin.frame.RoiManager;
-import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
 import ij.process.ImageStatistics;
 
 import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
-import java.awt.image.ColorModel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -63,7 +61,6 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 	boolean processStack;
 	boolean previewIsActive = false;
 	private static Shape_Filter instance = null;
-	private boolean registered;
 	public Shape_Filter() {
 		instance=this;
 	}
@@ -250,6 +247,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 						.getPerimeterConvexHull());
 				rt.addValue("Feret", fb.get(i).getFeretDiameter());
 				rt.addValue("Min. Feret", fb.get(i).getMinFeretDiameter());
+				rt.addValue("Maximum Inscriped Circle Diameter", fb.get(i).getDiamaterMaximumInscribedCircle());
 				rt.addValue("Long Side Length MBR", fb.get(i).getLongSideMBR());
 				rt.addValue("Short Side Length MBR", fb.get(i).getShortSideMBR());
 				rt.addValue("Aspect Ratio", fb.get(i).getAspectRatio());

@@ -46,23 +46,24 @@ class BlobFilterDialog implements DialogListener {
 		GenericDialog gd = new GenericDialog("Shape Filter");
 		
 		//Features
-		gd.addStringField("Area", "0-Infinity");
-		gd.addStringField("Area_Convex_Hull", "0-Infinity");
-		gd.addStringField("Perimeter", "0-Infinity");
-		gd.addStringField("Perimeter_Convex_Hull", "0-Infinity");
-		gd.addStringField("Feret_Diameter", "0-Infinity");
-		gd.addStringField("Min._Feret_Diameter", "0-Infinity");
-		gd.addStringField("Long_Side_Min._Bounding_Rect.", "0-Infinity");
-		gd.addStringField("Short_Side_Min._Bounding_Rect.", "0-Infinity");
+		gd.addStringField("Area", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Area_Convex_Hull", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Perimeter", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Perimeter_Convex_Hull", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Feret_Diameter", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Min._Feret_Diameter", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Max_Inscr_Circle_Diameter", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Long_Side_Min._Bounding_Rect.", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Short_Side_Min._Bounding_Rect.", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Aspect_Ratio", "1-Infinity");
-		gd.addStringField("Area_to_Perimeter_ratio", "0-Infinity");
-		gd.addStringField("Circularity", "0-Infinity");
-		gd.addStringField("Elongation", "0-1");
-		gd.addStringField("Convexity", "0-1");
-		gd.addStringField("Solidity", "0-1");
-		gd.addStringField("Num._of_Holes", "0-Infinity");
-		gd.addStringField("Thinnes_ratio", "0-1");
-		gd.addStringField("Contour_Temperatur", "0-1");
+		gd.addStringField("Area_to_Perimeter_ratio", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Circularity", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Elongation", DEFAULT_ZERO_ONE);
+		gd.addStringField("Convexity", DEFAULT_ZERO_ONE);
+		gd.addStringField("Solidity", DEFAULT_ZERO_ONE);
+		gd.addStringField("Num._of_Holes", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Thinnes_ratio", DEFAULT_ZERO_ONE);
+		gd.addStringField("Contour_Temperatur", DEFAULT_ZERO_ONE);
 		gd.addStringField("Orientation", "0-180");
 		gd.addStringField("Fractal_Box_Dimension", "0-2");
 		gd.addStringField("Option->Box-Sizes:","2,3,4,6,8,12,16,32,64");
@@ -111,6 +112,7 @@ class BlobFilterDialog implements DialogListener {
 		params.addFilter(Blob.GETPERIMETERCONVEXHULL , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETFERETDIAMETER , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETMINFERETDIAMETER , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
+		params.addFilter(Blob.GETDIAMETERMAXIMUMINSCRIBEDCIRCLE, stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETLONGSIDEMBR , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETSHORTSIDEMBR , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETASPECTRATIO , stringIntervalToArray(gd.getNextString(),"1-Infinity"));
