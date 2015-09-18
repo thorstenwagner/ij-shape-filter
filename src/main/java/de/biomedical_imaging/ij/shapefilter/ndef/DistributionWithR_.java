@@ -41,17 +41,13 @@ public class DistributionWithR_ implements PlugIn{
 				int start = IJ.getTextPanel().getSelectionStart();
 				int end = IJ.getTextPanel().getSelectionEnd();
 				if(start!=-1){
-					IJ.log("start " + start + " end " + end);
 					if(start == end){
 						
 						int frame = Integer.parseInt(ResultsTable.getResultsTable().getStringValue(0, start));
 						int label = Integer.parseInt(ResultsTable.getResultsTable().getStringValue(1, start));
-						IJ.log("Frame " + frame + " Label " + label);
 						Blob b = Shape_Filter.getInstance().getBlobByFrameAndLabel(frame-1, label);
 						Shape_Filter.getInstance().getAllBlobs()[frame-1].remove(b);
-						IJ.log("Counter "  + ResultsTable.getResultsTable().getCounter());
 						ResultsTable.getResultsTable().deleteRow(start);
-						IJ.log("Counter "  + ResultsTable.getResultsTable().getCounter());
 						IJ.runMacro("updateResults();");
 					}
 				}

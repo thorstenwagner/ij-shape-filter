@@ -49,11 +49,13 @@ public class UltimatePointsDiameter_ implements PlugInFilter {
 
 	@Override
 	public void run(ImageProcessor ip) {
-		EDM dm = new EDM();
+		
+		//Findet die Maximas der EDM und weißt Sie Blobs zu. 
+		
 		if(!isBlackBackground){
 			ip.invert();
 		}
-		
+		EDM dm = new EDM();
 		FloatProcessor fp = dm.makeFloatEDM (ip, 0, false);
 		
 		MaximumFinder mf  = new MaximumFinder();

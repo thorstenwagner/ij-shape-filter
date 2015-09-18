@@ -28,7 +28,11 @@ import ij.gui.Roi;
 import ij.gui.Toolbar;
 import ij.measure.ResultsTable;
 import ij.plugin.PlugIn;
-
+/**
+ * Dieses Plugin zeigt die Konturen eines binären Bildes als Overlay an.
+ * @author Thorsten Wagner
+ *
+ */
 public class ShowAsOverlay_ implements PlugIn{
 	ImagePlus binaryImg;
 	ImagePlus targetImg;

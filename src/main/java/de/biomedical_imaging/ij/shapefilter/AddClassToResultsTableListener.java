@@ -12,6 +12,11 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Diese Klasse ermöglicht es, einzelnen Blobs Klassen zuzuordnen. 
+ * @author Thorsten Wagner (wagner@biomedical-imaging.de)
+ *
+ */
 public class AddClassToResultsTableListener implements KeyListener {
 
 	private ImagePlus imp;
