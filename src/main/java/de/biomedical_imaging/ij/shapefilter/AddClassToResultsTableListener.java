@@ -7,8 +7,6 @@ import ij.gui.GenericDialog;
 import ij.gui.PointRoi;
 import ij.gui.Roi;
 import ij.plugin.filter.Analyzer;
-
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -61,7 +59,6 @@ public class AddClassToResultsTableListener implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		IJ.log("EVENT");
 		Roi r = imp.getRoi();
 		if(r!= null && r.getType()==Roi.POINT && arg0.getKeyChar()=='c'){
 
@@ -96,7 +93,7 @@ public class AddClassToResultsTableListener implements KeyListener {
 				if(slice==IJ.getImage().getSlice()){
 					int bloblabel= (int)Analyzer.getResultsTable().getValueAsDouble(1, j);
 					Blob b = Shape_Filter.getInstance().getBlobByFrameAndLabel(slice-1, bloblabel);
-					if(r.getBoundingRect().contains(b.getCenterOfGravity())){
+					if(r.getBounds().contains(b.getCenterOfGravity())){
 						Analyzer.getResultsTable().setValue("Class", getRowToBlob(b), classname);
 
 						Analyzer.getResultsTable().show("Results");
