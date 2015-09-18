@@ -16,7 +16,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<version>1.3.0</version>
 	<packaging>jar</packaging>
  
-	<name>Shape Filter Plugin for ImageJ</name>
+	<name>Shape Filter Plugin for ImageJ</name><!--$NO-MVN-MAN-VER$-->
 	<url>https://github.com/jumpfunky/ij-shape-filter</url>
 	
 	
