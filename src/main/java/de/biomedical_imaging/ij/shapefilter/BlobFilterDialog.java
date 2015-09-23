@@ -52,7 +52,7 @@ class BlobFilterDialog implements DialogListener {
 		gd.addStringField("Perimeter_Convex_Hull", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Feret_Diameter", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Min._Feret_Diameter", DEFAULT_ZERO_INFINITY);
-		gd.addStringField("Max_Inscr_Circle_Diameter", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Max._Inscr._Circle_Diameter", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Long_Side_Min._Bounding_Rect.", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Short_Side_Min._Bounding_Rect.", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Aspect_Ratio", "1-Infinity");

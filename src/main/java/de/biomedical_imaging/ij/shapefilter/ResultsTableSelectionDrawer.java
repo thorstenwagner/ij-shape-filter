@@ -70,6 +70,8 @@ public class ResultsTableSelectionDrawer implements MouseListener {
 	public void showAsOverlay(int start, int end){
 		
 		Overlay ov = imp.getOverlay();
+		IJ.selectWindow(imp.getTitle());
+		
 		if(ov==null){
 			ov = new Overlay();
 			IJ.getImage().setOverlay(ov);
@@ -107,8 +109,8 @@ public class ResultsTableSelectionDrawer implements MouseListener {
 		}
 
 
-		IJ.getImage().setSlice(firstSlice);
-		IJ.getImage().repaintWindow();
+		imp.setSlice(firstSlice);
+		imp.repaintWindow();
 		
 		
 		// setOverlay(ov);
