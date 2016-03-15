@@ -44,10 +44,12 @@ public class ImageResultsTableSelector implements MouseListener {
 		for(int i = 0; i < Analyzer.getResultsTable().getCounter(); i++){
 			int slice = (int)Analyzer.getResultsTable().getValueAsDouble(0, i);
 			if(slice==imp.getSlice()){
-				
+		
 				int bloblabel= (int)Analyzer.getResultsTable().getValueAsDouble(1, i);
 				Blob b = Shape_Filter.getInstance().getBlobByFrameAndLabel(slice-1, bloblabel);
+			
 				if(b.getOuterContour().contains(x, y)){
+				
 					IJ.getTextPanel().setSelection(i, i);
 					
 					PolygonRoi pr = new PolygonRoi(b.getOuterContour().xpoints.clone(),b.getOuterContour().ypoints.clone(),b.getOuterContour().npoints,Roi.TRACED_ROI);
