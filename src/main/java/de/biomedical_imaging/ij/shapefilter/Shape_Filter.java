@@ -35,6 +35,7 @@ import ij.plugin.filter.Analyzer;
 import ij.plugin.filter.ExtendedPlugInFilter;
 import ij.plugin.filter.PlugInFilterRunner;
 import ij.plugin.frame.RoiManager;
+import ij.process.ByteProcessor;
 import ij.process.ImageProcessor;
 import ij.process.ImageStatistics;
 
@@ -96,15 +97,49 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 	
 		
 		
-		return DOES_8G;
+		return DOES_8G+DOES_16;
 	}
 	
-	@Override
-	public void run(ImageProcessor ip) {
+	public void run_on_multilabel(ImageProcessor ip) {
+		currentIP = ip;
+		ImagePlus helpimp = new ImagePlus("", ip);
+		helpimp.setCalibration(imp.getCalibration());
+		
+		
+		
+		ImageStatistics stats = helpimp.getStatistics();
+		int min_label = (int)stats.min;
+		int max_label = (int)stats.max;
+		for(int threshold = min_label; threshold < max_label; min_label++) {
+			ImageProcessor hlp = ip.duplicate();
+			hlp.setThreshold(threshold, threshold);
+			ByteProcessor mask = hlp.createMask();
+			ImagePlus mask_imp = new ImagePlus("", mask);
+			mask_imp.setCalibration(imp.getCalibration());
+			
+			allBlobs[currentIP.getSliceNumber()-1] = new ManyBlobs(mask_imp);
+			allBlobs[currentIP.getSliceNumber()-1].setBackground(0);
+			allBlobs[currentIP.getSliceNumber()-1].findConnectedComponents();
+			
+			// Probably I should extend the ManyBlobs class
+			// Create Results Image
+			// Change results label by setting object to label number
+			// Add this the global label image...
+			// Add to manager (should work as for greyscale)
+			// Add to results table (should work as for greyscale)
+			//
+		}
+		
+		
+		
+	}
+	
+	public void run_on_binary(ImageProcessor ip) {
 		currentIP = ip;
 		
 		ImagePlus helpimp = new ImagePlus("", ip);
 		helpimp.setCalibration(imp.getCalibration());
+		
 		allBlobs[currentIP.getSliceNumber()-1] = new ManyBlobs(helpimp);
 		
 		//Set the background color used by Center Method blob and maximum
@@ -132,12 +167,19 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 			labeledImageStack.addSlice(fb.getLabeledImage().getProcessor());
 		
 			if(currentIP.getSliceNumber()==imp.getStackSize()){
-				ImagePlus help = new ImagePlus("Labeled Image");
+				ImagePlus help = new ImagePlus();
+				help.setTitle("Labeled Image");
 				help.setStack(labeledImageStack);
 				help.show();
 			}
 		}
 		
+		
+	}
+	
+	@Override
+	public void run(ImageProcessor ip) {
+		run_on_binary(ip);
 	}
 	
 	
@@ -234,7 +276,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 			 rt = new ResultsTable();	
 			 Analyzer.setResultsTable(rt);
 		}
-
+		rt.setPrecision(4);
 		ManyBlobs fb = getFilteredBlobs(params);
 		for (int i = 0; i < fb.size(); i++) {
 				rt.incrementCounter();
@@ -250,7 +292,8 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 						.getPerimeterConvexHull());
 				rt.addValue("Feret", fb.get(i).getFeretDiameter());
 				rt.addValue("Min. Feret", fb.get(i).getMinFeretDiameter());
-				rt.addValue("Maximum Inscriped Circle Diameter", fb.get(i).getDiamaterMaximumInscribedCircle());
+				rt.addValue("Maximum inscriped circle diameter", fb.get(i).getDiamaterMaximumInscribedCircle());
+				rt.addValue("Area equivalent circle diameter", fb.get(i).getAreaEquivalentSphericalDiameter());
 				rt.addValue("Long Side Length MBR", fb.get(i).getLongSideMBR());
 				rt.addValue("Short Side Length MBR", fb.get(i).getShortSideMBR());
 				rt.addValue("Aspect Ratio", fb.get(i).getAspectRatio());

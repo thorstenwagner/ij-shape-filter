@@ -53,6 +53,7 @@ class BlobFilterDialog implements DialogListener {
 		gd.addStringField("Feret_Diameter", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Min._Feret_Diameter", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Max._Inscr._Circle_Diameter", DEFAULT_ZERO_INFINITY);
+		gd.addStringField("Area_eq._circle_diameter", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Long_Side_Min._Bounding_Rect.", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Short_Side_Min._Bounding_Rect.", DEFAULT_ZERO_INFINITY);
 		gd.addStringField("Aspect_Ratio", "1-Infinity");
@@ -113,6 +114,7 @@ class BlobFilterDialog implements DialogListener {
 		params.addFilter(Blob.GETFERETDIAMETER , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETMINFERETDIAMETER , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETDIAMETERMAXIMUMINSCRIBEDCIRCLE, stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
+		params.addFilter(Blob.GETAREAEQUIVALENTSPHERICALDIAMETER, stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETLONGSIDEMBR , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETSHORTSIDEMBR , stringIntervalToArray(gd.getNextString(),DEFAULT_ZERO_INFINITY));
 		params.addFilter(Blob.GETASPECTRATIO , stringIntervalToArray(gd.getNextString(),"1-Infinity"));
