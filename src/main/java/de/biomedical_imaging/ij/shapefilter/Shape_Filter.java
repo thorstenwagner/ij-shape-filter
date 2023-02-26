@@ -78,6 +78,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 		}
 		
 		//Check if binary
+		/*
 		ImageStatistics stats = imp.getStatistics();
 		float binaryRatio = ((float)(stats.histogram[0] + stats.histogram[255]))/stats.pixelCount;
 		if (binaryRatio > 0.90 && ((int)binaryRatio) != 1) {
@@ -89,7 +90,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 			IJ.error("Binary Image is needed!");
 			return DONE;
 		}
-		
+		*/
 		this.imp = imp;
 		labeledImageStack = new ImageStack(imp.getWidth(), imp.getHeight());
 
