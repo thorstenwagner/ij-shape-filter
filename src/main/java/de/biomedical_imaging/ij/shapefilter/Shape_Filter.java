@@ -58,6 +58,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 	private ImagePlus imp;
 	private ImageStack labeledImageStack;
 	private ManyBlobs[] allBlobs; 	//For each slice one ManyBlobs object
+	private ManyBlobs[] filteredBlobs; 	//For each slice one ManyBlobs object
 	private ImageProcessor currentIP;
 	private FilterParameters para;
 	private ResultsTable rt;
@@ -71,12 +72,13 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 	@Override
 	public int setup(String arg, ImagePlus imp) {
 		
-		if (imp == null || imp.getType() != ImagePlus.GRAY8) {
+		if (imp == null ) { //|| imp.getType() != ImagePlus.GRAY8
 			IJ.error("Binary Image is needed!");
 			return DONE;
 		}
 		
 		//Check if binary
+		/*
 		ImageStatistics stats = imp.getStatistics();
 		float binaryRatio = ((float)(stats.histogram[0] + stats.histogram[255]))/stats.pixelCount;
 		if (binaryRatio > 0.90 && ((int)binaryRatio) != 1) {
@@ -88,7 +90,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 			IJ.error("Binary Image is needed!");
 			return DONE;
 		}
-		
+		*/
 		this.imp = imp;
 		labeledImageStack = new ImageStack(imp.getWidth(), imp.getHeight());
 
@@ -96,13 +98,13 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 	
 		
 		
-		return DOES_8G;
+		return DOES_8G+DOES_16;
 	}
 	
 	@Override
 	public void run(ImageProcessor ip) {
 		currentIP = ip;
-		
+
 		ImagePlus helpimp = new ImagePlus("", ip);
 		helpimp.setCalibration(imp.getCalibration());
 		allBlobs[currentIP.getSliceNumber()-1] = new ManyBlobs(helpimp);
@@ -115,6 +117,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 			allBlobs[currentIP.getSliceNumber()-1].setBackground(1);
 		}
 		allBlobs[currentIP.getSliceNumber()-1].findConnectedComponents();
+		IJ.log("Size after cca:"+ allBlobs[currentIP.getSliceNumber()-1].size());
 		IJ.showStatus("Component Labeling Done");
 		
 		calculateResultImage(para);
@@ -211,6 +214,18 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 	
 	/**
 	 * 
+	 * @return An array with ijblob manyblobs objects after filter parameters got applied (for each slice one).
+	 */
+	public ManyBlobs[] getAllFilteredBlobs() {
+		ManyBlobs[] all_filtered_blobs = new ManyBlobs[imp.getStackSize()];
+		for(int i = 0; i<imp.getStackSize(); i++) {
+			all_filtered_blobs[i] = doFilter(para, i+1);
+		}
+		return all_filtered_blobs;
+	}
+	
+	/**
+	 * 
 	 * @param frame
 	 * @param label
 	 * @return a blob with label 'label' in frame with index 'frame'
@@ -276,6 +291,9 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 		rt.show("Results");
 	}
 	
+	public FilterParameters getLastParameters() {
+		return para;
+	}
 	
 	private void calculateResultImage(FilterParameters params) {
 		ManyBlobs fb = getFilteredBlobs(params);
@@ -324,12 +342,20 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 		}
 	}
 	
+	
 	private ManyBlobs getFilteredBlobs(FilterParameters params){
+		return doFilter(params, currentIP.getSliceNumber());
+	}
+	
+	/*
+	 * Runs the filter parameters on a certain slice
+	 */
+	private ManyBlobs doFilter(FilterParameters params, int slice_index) {
 		ManyBlobs fb = new ManyBlobs();
+		ImageProcessor ip = imp.getStack().getProcessor(slice_index);
 		Iterator<Entry<String, double[]>> it = params.getFeatureIterator();
 		Entry<String, double[]> pairs = it.next();
-	
-		fb = allBlobs[currentIP.getSliceNumber()-1].filterBlobs((double[])pairs.getValue(), pairs.getKey(),params.getFilterMethodParameter(pairs.getKey()));
+		fb = allBlobs[slice_index-1].filterBlobs((double[])pairs.getValue(), pairs.getKey(),params.getFilterMethodParameter(pairs.getKey()));
 		while(it.hasNext()) {
 			pairs = it.next();
 			fb = fb.filterBlobs((double[])pairs.getValue(), pairs.getKey(),params.getFilterMethodParameter(pairs.getKey()));
@@ -337,14 +363,13 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 		if(params.isExcludeOnEdges()){
 			ArrayList<Blob> blobsOnEdges = new ArrayList<Blob>();
 			for (Blob blob : fb) {
-				if(blob.isOnEdge(currentIP)){
+				if(blob.isOnEdge(ip)){
 					blobsOnEdges.add(blob);
 				}
 			}
 			fb.removeAll(blobsOnEdges);
 		}
 		return fb;
-		
 	}
 	
 	/**
