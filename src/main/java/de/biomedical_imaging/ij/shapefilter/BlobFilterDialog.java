@@ -71,8 +71,8 @@ class BlobFilterDialog implements DialogListener {
 		gd.addHelp("http://code.google.com/p/ijblob/wiki/BasicFeatures");
 		
 		//Options
-		String[] labels = new String[8];
-		boolean[] states = new boolean[8];
+		String[] labels = new String[9];
+		boolean[] states = new boolean[9];
 		labels[0]="Add_to_Manager"; states[0]=true;
 		labels[1]="Draw_Holes"; states[1]=true;
 		labels[2]="Draw_Convex_Hull"; states[2]=false;
@@ -81,7 +81,8 @@ class BlobFilterDialog implements DialogListener {
 		labels[5]="Show_Labeled_Image"; states[5]=false;
 		labels[6]="Fill_Results_Table"; states[6]=true;
 		labels[7]="Exclude_on_edges"; states[7]=true;
-		gd.addCheckboxGroup(4, 2, labels, states);
+		labels[8]="Draw contours to split objects"; states[8]=false;
+		gd.addCheckboxGroup(5, 2, labels, states);
 		gd.addPreviewCheckbox(pfr);
 		gd.addDialogListener(this);
 		gd.showDialog();
@@ -135,6 +136,7 @@ class BlobFilterDialog implements DialogListener {
 		params.setShowLabeledImage(gd.getNextBoolean());
 		params.setFillResultsTable(gd.getNextBoolean());
 		params.setExcludeOnEdges(gd.getNextBoolean());
+		params.setDrawContours(gd.getNextBoolean());
 	}
 	
 	/**

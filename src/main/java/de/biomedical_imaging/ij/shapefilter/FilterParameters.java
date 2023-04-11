@@ -37,6 +37,7 @@ class FilterParameters {
 	private boolean blackBackground;
 	private boolean showLabeledImage;
 	private boolean excludeOnEdges;
+	private boolean drawContours;
 	
 	/**
 	 * Sets the fill results table property
@@ -161,6 +162,17 @@ class FilterParameters {
 	
 	public void setExcludeOnEdges(boolean exclude){
 		this.excludeOnEdges = exclude;
+	}
+	
+	public void setDrawContours(boolean draw) {
+		this.drawContours = draw;
+	}
+	
+	public int isDrawContours() {
+		if(drawContours) {
+			return Blob.DRAW_CONTOUR;
+		}
+		return 0;
 	}
 
 	public void addFilter(String featureMethod, double[] minxmax, Object... methodparams) {

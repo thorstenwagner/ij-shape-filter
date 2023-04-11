@@ -310,7 +310,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 		for (int i = 0; i < fb.size(); i++) {
 			IJ.showStatus("Feature Calculation");
 			IJ.showProgress(i + 1, fb.size());
-			fb.get(i).draw(currentIP, params.isDrawHoles() | params.isDrawConvexHull() | params.isDrawLabel());
+			fb.get(i).draw(currentIP, params.isDrawHoles() | params.isDrawConvexHull() | params.isDrawLabel() | params.isDrawContours());
 		}
 	}
 	
