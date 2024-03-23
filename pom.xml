@@ -18,7 +18,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<groupId>de.biomedical-imaging.ij</groupId>
 	<artifactId>ij_shape_filter</artifactId>
-	<version>1.4.6</version>
+	<version>1.4.7</version>
 	<packaging>jar</packaging>
  
 	<name>Shape Filter Plugin for ImageJ</name>
