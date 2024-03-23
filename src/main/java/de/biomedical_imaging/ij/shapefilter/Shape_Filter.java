@@ -265,7 +265,7 @@ public class Shape_Filter implements ExtendedPlugInFilter {
 						.getPerimeterConvexHull());
 				rt.addValue("Feret", fb.get(i).getFeretDiameter());
 				rt.addValue("Min. Feret", fb.get(i).getMinFeretDiameter());
-				rt.addValue("Maximum inscriped circle diameter", fb.get(i).getDiamaterMaximumInscribedCircle());
+				rt.addValue("Maximum inscribed circle diameter", fb.get(i).getDiamaterMaximumInscribedCircle());
 				rt.addValue("Area equivalent circle diameter",fb.get(i).getAreaEquivalentSphericalDiameter());
 				rt.addValue("Long Side Length MBR", fb.get(i).getLongSideMBR());
 				rt.addValue("Short Side Length MBR", fb.get(i).getShortSideMBR());
